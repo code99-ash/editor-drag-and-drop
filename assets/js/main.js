@@ -235,7 +235,7 @@ let rect2 = new Rectangle({ctx, x: 70, y: 110, width: 100, height: 120, fill: 'v
 cvs.appendShape(rect2)
 
 function changeCursorType(type) {
-    console.log(type)
+    // console.log(type)
     switch (type) {
         case 'top-left':
             canvas.style.cursor = 'nw-resize' 
