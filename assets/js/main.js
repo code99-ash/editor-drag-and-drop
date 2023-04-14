@@ -234,13 +234,33 @@ cvs.appendShape(rect1)
 let rect2 = new Rectangle({ctx, x: 70, y: 110, width: 100, height: 120, fill: 'violet'});
 cvs.appendShape(rect2)
 
+function changeCursorType(type) {
+    switch (type) {
+        case 'top-left':
+            canvas.style.cursor = 'nw-resize' 
+            break;
+        case 'top-right':
+            canvas.style.cursor = 'ne-resize' 
+            break;
+        case 'bottom-left':
+            canvas.style.cursor = 'sw-resize' 
+            break;
+        case 'bottom-right':
+            canvas.style.cursor = 'se-resize' 
+            break;
+    
+        default:
+            canvas.style.cursor = 'auto'
+    }
+}
+
 canvas.addEventListener('mousedown', (e) => {
     cvs.getSelection(e.clientX, e.clientY)
     cvs.mouseDown = true
 
     canvas.addEventListener('mousemove', (e) => {
        cvs.setMousePosition(e.clientX, e.clientY)
-       if(!cvs.mouseDown) return
+       if(!cvs.selection) return
        
        let boxIntercepted = null;
        // Check if mouse intercept with either of the boxes
@@ -251,12 +271,16 @@ canvas.addEventListener('mousedown', (e) => {
                 && 
                 cvs.mouseY >= box.target.y && cvs.mouseY <= box.target.y + box.target.height
             ) {
-                boxIntercepted = box.target
+                boxIntercepted = box
+                break;
             }
-       }
-       if(!boxIntercepted) return;
-
-       console.log('intercepted',boxIntercepted)
+        }
+        if(!boxIntercepted) {
+            return changeCursorType()
+        }
+        
+        changeCursorType(boxIntercepted.type)
+    //    console.log('intercepted',boxIntercepted)
     })
 
     canvas.addEventListener('mouseup', () => {
