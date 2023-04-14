@@ -231,7 +231,13 @@ canvas.style.backgroundColor = '#ddd';
 
 let rect1 = new Rectangle({ctx, x: 10, y: 20, width: 100, height: 120, fill: 'red'});
 cvs.appendShape(rect1)
+let rect2 = new Rectangle({ctx, x: 70, y: 110, width: 100, height: 120, fill: 'violet'});
+cvs.appendShape(rect2)
 
 canvas.addEventListener('mousedown', (e) => {
     cvs.getSelection(e.clientX, e.clientY)
+
+    canvas.addEventListener('mousemove', (e) => {
+
+    })
 })
