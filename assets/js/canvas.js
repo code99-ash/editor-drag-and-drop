@@ -42,6 +42,8 @@ export class TmpCanvas extends ShapeBucket {
         this.setMousePosition(clientX, clientY)
         this.intersection = this.findSelectedShape()
 
+        if(!this.intersection) return;
+        
         this.selection = new Selection({
             ctx: this.ctx,
             x: this.intersection.x,
