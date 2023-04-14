@@ -81,9 +81,10 @@ export class Selection {
                 x: dim.x,
                 y: dim.y
             })
-            this.handles.push(box)
+            this.handles.push({type: dim.type, target: box})
         })
-        console.log(this.handles)
+        // console.log(this.handles)
     }
 
+    // draggingTopLeft(e)
 }

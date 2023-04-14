@@ -236,8 +236,30 @@ cvs.appendShape(rect2)
 
 canvas.addEventListener('mousedown', (e) => {
     cvs.getSelection(e.clientX, e.clientY)
+    cvs.mouseDown = true
 
     canvas.addEventListener('mousemove', (e) => {
+       cvs.setMousePosition(e.clientX, e.clientY)
+       if(!cvs.mouseDown) return
+       
+       let boxIntercepted = null;
+       // Check if mouse intercept with either of the boxes
+       for (const type in cvs.selection.handles) {
+            let box = cvs.selection.handles[type]
+            if( 
+                cvs.mouseX >= box.target.x && cvs.mouseX <= box.target.x + box.target.width
+                && 
+                cvs.mouseY >= box.target.y && cvs.mouseY <= box.target.y + box.target.height
+            ) {
+                boxIntercepted = box.target
+            }
+       }
+       if(!boxIntercepted) return;
 
+       console.log('intercepted',boxIntercepted)
+    })
+
+    canvas.addEventListener('mouseup', () => {
+        cvs.mouseDown = false
     })
 })

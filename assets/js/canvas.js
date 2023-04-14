@@ -13,6 +13,7 @@ export class TmpCanvas extends ShapeBucket {
         this.mouseY = null
         this.intersection = null;
         this.selection = null
+        this.mouseDown = false
     } 
 
     setMousePosition(clientX, clientY) {
