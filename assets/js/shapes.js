@@ -29,7 +29,7 @@ export class Selection {
         this.borderRadius = 2
         this.handleSize = 12 
         this.borderSize = 4
-        this.handles = []
+        this.handles = {}
         this.draw()
     }
 
@@ -81,7 +81,7 @@ export class Selection {
                 x: dim.x,
                 y: dim.y
             })
-            this.handles.push({type: dim.type, target: box})
+            this.handles[dim.type] = box
         })
         // console.log(this.handles)
     }

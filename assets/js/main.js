@@ -235,6 +235,7 @@ let rect2 = new Rectangle({ctx, x: 70, y: 110, width: 100, height: 120, fill: 'v
 cvs.appendShape(rect2)
 
 function changeCursorType(type) {
+    console.log(type)
     switch (type) {
         case 'top-left':
             canvas.style.cursor = 'nw-resize' 
@@ -266,12 +267,14 @@ canvas.addEventListener('mousedown', (e) => {
        // Check if mouse intercept with either of the boxes
        for (const type in cvs.selection.handles) {
             let box = cvs.selection.handles[type]
+            
             if( 
-                cvs.mouseX >= box.target.x && cvs.mouseX <= box.target.x + box.target.width
+                cvs.mouseX >= box.x && cvs.mouseX <= box.x + box.width
                 && 
-                cvs.mouseY >= box.target.y && cvs.mouseY <= box.target.y + box.target.height
+                cvs.mouseY >= box.y && cvs.mouseY <= box.y + box.height
             ) {
-                boxIntercepted = box
+                // console.log(type)
+                boxIntercepted = type
                 break;
             }
         }
@@ -279,7 +282,7 @@ canvas.addEventListener('mousedown', (e) => {
             return changeCursorType()
         }
         
-        changeCursorType(boxIntercepted.type)
+        changeCursorType(boxIntercepted)
     //    console.log('intercepted',boxIntercepted)
     })
 
